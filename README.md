@@ -275,3 +275,24 @@ plot_classification(test_images, test_labels, test_predictions, size=(2, 3)).sho
 ```
 
 > ![classification](images/classification.svg)
+
+## Discussion and Analysis
+
+I used following structure to build CNN architecture for the MNIST classification.
+
+| Layer       | Parameter                                  |
+| ----------- | ------------------------------------------ |
+| Convolution | Channels = 32,  Kernel = 3 x 3, Stride = 1 |
+| Activation  | Function = ReLU                            |
+| Pooling     | Function = Max, Kernel = 2 x 2, Stride = 2 |
+| Convolution | Channels = 64,  Kernel = 3 x 3, Stride = 1 |
+| Activation  | Function = ReLU                            |
+| Pooling     | Function = Max, Kernel = 2 x 2, Stride = 2 |
+| Flatten     | -                                          |
+| Linear      | Nodes = 10                                 |
+
+In this architecture, two sets of convolution layers act as feature extractor and the last linear layer acts as linear classifier.
+I used two max-pooling layers to reduce the number of parameters of the model which prevent overfitting.
+I set the learning rate 0.0001, the batch size 512, and ran 30 epochs to adjust a training time and a performance of the model.
+Also, I introduced a different batch size 1024 for the test batch to reduce a testing time.
+As shown in the train result plot above, both the train loss and the test loss steadily decreased and reached a certain level. And the test accuracy reached the accuracy of 0.98 as intended. It means the algorithm properly converged, and did not overfitted or underfitted.
